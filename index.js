@@ -37,7 +37,7 @@ app.post("/api/shorturl/", (req, res) => {
   const url = req.body.url
   const cleanUrl = url.replace(/https?:\/\//gi, '').replace(/ftp?:/gi, '').split('/')[0]
   dns.lookup(cleanUrl, options, (err, adresses, family) => {
-    if (err) {
+    if (err || cleanUrl === "") {
       console.error(err)
       res.json({ error: 'invalid url' })
     }
